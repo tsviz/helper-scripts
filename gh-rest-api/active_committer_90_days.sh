@@ -2,8 +2,8 @@
 function ninety_days_ago {
     date -v-90d -u "+%Y-%m-%dT%H:%M:%SZ"
 }
-ORG="$(git remote get-url origin | cut -d '/' -f 1 | cut -d ':' -f 2)"
-REPO="$(git remote get-url origin | cut -d '/' -f 2 | cut -d '.' -f 1)"
+ORG="$(git remote get-url origin | sed -n 's/.*:\/\/github.com\/\([^\/]*\)\/.*/\1/p')"
+REPO="$(git remote get-url origin | sed 's/.*\/\([^ ]*\)\.git/\1/')"
 TOKEN="$(cat ~/.ssh/github_token)"
 # Initialize an empty array to hold all branches
 branches=()
